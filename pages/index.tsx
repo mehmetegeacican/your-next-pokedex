@@ -2,8 +2,8 @@ import Head from 'next/head';
 import { Inter } from 'next/font/google';
 import axios from 'axios';
 import PokeCard from '@/components/PokeCard';
-import { Box, SimpleGrid,Container, Input, InputGroup,  InputLeftAddon, Flex, IconButton } from '@chakra-ui/react';
-import { SearchIcon,ArrowBackIcon,ArrowDownIcon,ArrowForwardIcon } from '@chakra-ui/icons';
+import { Box, SimpleGrid,Container, Input, InputGroup, Flex, IconButton } from '@chakra-ui/react';
+import { ArrowBackIcon,ArrowDownIcon,ArrowForwardIcon } from '@chakra-ui/icons';
 
 
 const inter = Inter({ subsets: ['latin'] });
@@ -16,6 +16,7 @@ export const getStaticProps = async () => {
     },
   };
 }
+
 
 export default function Home({pokemons}:any) {
   return (
@@ -51,7 +52,7 @@ export default function Home({pokemons}:any) {
         </Container>
         <Container maxW="container.sm" centerContent sx={{ mt: 5 }}>
           <SimpleGrid columns={3} spacing={1} width={800} sx={{ mt: 2 }}>
-            {pokemons.map((pokemon: any) => {
+            {pokemons && pokemons.map((pokemon: any) => {
               return (
                 <Box key={pokemon.name}>
                   <PokeCard url={pokemon.url} />
