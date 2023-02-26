@@ -11,6 +11,7 @@ import {
   Text,
   Button,
   Tag,
+  WrapItem,
 } from "@chakra-ui/react";
 import axios from "axios";
 import Image from "next/image";
@@ -38,12 +39,11 @@ export default function PokeCard({ url }: PokeCardProps) {
         <Heading size="md">{data.name}</Heading>
       </CardHeader>
       <CardBody>
-        {data.sprites && <img src={data.sprites.front_default} alt="sprite" />}
+          {data.sprites && <img src={data.sprites.front_default} alt="sprite"/>}
       </CardBody>
       <CardBody>
         <Stack divider={<Divider />} spacing={3}>
           <Box>
-            <Text>{data.id}</Text>
             <Tag  variant='solid' colorScheme='purple'>Type tags</Tag>
           </Box>
         </Stack>
