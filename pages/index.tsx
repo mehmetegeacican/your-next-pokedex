@@ -10,8 +10,8 @@ export default function Home() {
       <Head>
         <title>Pokedex</title>
       </Head>
-      <main className={styles.main}>
-        <div className={styles.description}>
+      <main >
+        <div >
           <p>
             Get started by editing&nbsp;
             <code className={styles.code}>pages/index.tsx</code>
