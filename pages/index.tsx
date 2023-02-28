@@ -17,13 +17,13 @@ import {
   ArrowDownIcon,
   ArrowForwardIcon,
 } from "@chakra-ui/icons";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const getStaticProps = async () => {
   const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon", {
-    params: { limit: 151, offset: 0 },
+    params: { limit: 1249, offset: 0 },
   });
   return {
     props: {
@@ -34,26 +34,43 @@ export const getStaticProps = async () => {
 
 export default function Home({ pokemons }: any) {
   const [offset, setOffset] = useState<number>(0);
-  const [limit,setLimit] = useState<number>(20);
-  const [pokeList,setPokelist] = useState<any>([]);
+  const [limit, setLimit] = useState<number>(20);
+  const [pokeList, setPokelist] = useState<any>([]);
+  const [query, setQuery] = useState<string>("");
+
+  //Pagination is being done on the Client side
 
   useEffect(() => {
     async function fetchPokePage() {
-      const {data}  = await axios.get("https://pokeapi.co/api/v2/pokemon", {
+      const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon", {
         params: { limit: limit, offset: offset },
       });
       setPokelist(data.results);
     }
     fetchPokePage();
-  },[offset,limit]);
+  }, [offset, limit]);
+
+  //While the Pagination is being done from the client side,
+  //The Filtering is being done on the server side
+  const pokemonList = useMemo(() => {
+    if (query === "") {
+      return pokeList;
+    } else {
+      setOffset(0);
+      return pokemons.filter((pokemon: any) => {
+        return pokemon.name.toLowerCase().includes(query.toLowerCase());
+      });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query, pokeList]);
 
   return (
     <>
       <Head>
-        <title>Pokedex</title>
+        <title>Pokedex - Home </title>
       </Head>
       <main>
-        <Container sx={{ mt: 5, alignContent:"center" }} maxW="md">
+        <Container sx={{ mt: 5, alignContent: "center" }} maxW="md">
           <Flex alignItems={"left"}>
             <IconButton
               colorScheme="blue"
@@ -70,14 +87,21 @@ export default function Home({ pokemons }: any) {
               onClick={() => setOffset(offset + limit)}
             />
             <InputGroup>
-              <Input placeholder="Search A specific Pokemon"  size='md'  htmlSize={90} width='auto'/>
+              <Input
+                placeholder="Search A specific Pokemon"
+                size="md"
+                htmlSize={90}
+                width="auto"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+              />
             </InputGroup>
           </Flex>
         </Container>
         <Container maxW="container.sm" centerContent sx={{ mt: 5 }}>
           <SimpleGrid columns={3} spacing={1} width={800} sx={{ mt: 2 }}>
             {pokeList &&
-              pokeList.map((pokemon: any) => {
+              pokemonList.map((pokemon: any) => {
                 return (
                   <Box key={pokemon.name}>
                     <PokeCard url={pokemon.url} />
