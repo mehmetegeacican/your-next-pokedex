@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import Image from "next/image";
+import TypeTag from "./TypeTag";
 
 const fetchPokeData = async (url: string) => {
   const { data } = await axios.get(url);
@@ -39,12 +40,15 @@ export default function PokeCard({ url }: PokeCardProps) {
         <Heading size="md">{data.name}</Heading>
       </CardHeader>
       <CardBody>
-          {data.sprites && <img src={data.sprites.front_default} alt="sprite"/>}
+        {data.sprites && <img src={data.sprites.front_default} alt="sprite" />}
       </CardBody>
       <CardBody>
         <Stack divider={<Divider />} spacing={3}>
           <Box>
-            <Tag  variant='solid' colorScheme='purple'>Type tags</Tag>
+            {data.types &&
+              data.types.map((item: any) => {
+                return <TypeTag key={item.slot} type={item} />;
+              })}
           </Box>
         </Stack>
       </CardBody>

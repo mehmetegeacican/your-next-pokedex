@@ -10,13 +10,8 @@ import {
   InputGroup,
   Flex,
   IconButton,
-  InputLeftAddon,
 } from "@chakra-ui/react";
-import {
-  ArrowBackIcon,
-  ArrowDownIcon,
-  ArrowForwardIcon,
-} from "@chakra-ui/icons";
+import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import { useEffect, useMemo, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -34,7 +29,7 @@ export const getStaticProps = async () => {
 
 export default function Home({ pokemons }: any) {
   const [offset, setOffset] = useState<number>(0);
-  const [limit, setLimit] = useState<number>(20);
+  const [limit, setLimit] = useState<number>(18);
   const [pokeList, setPokelist] = useState<any>([]);
   const [query, setQuery] = useState<string>("");
 
@@ -61,8 +56,16 @@ export default function Home({ pokemons }: any) {
         return pokemon.name.toLowerCase().includes(query.toLowerCase());
       });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query, pokeList]);
+
+  const handleOffset = () => {
+    if (offset - limit <= 0) {
+      setOffset(0);
+    } else {
+      setOffset(offset - limit);
+    }
+  };
 
   return (
     <>
@@ -77,7 +80,7 @@ export default function Home({ pokemons }: any) {
               aria-label="Search database"
               icon={<ArrowBackIcon />}
               sx={{ mr: 2 }}
-              onClick={() => setOffset(offset - limit)}
+              onClick={() => handleOffset()}
             />
             <IconButton
               colorScheme="blue"
