@@ -16,6 +16,7 @@ import {
 import axios from "axios";
 import Image from "next/image";
 import TypeTag from "./TypeTag";
+import Link from "next/link";
 
 const fetchPokeData = async (url: string) => {
   const { data } = await axios.get(url);
@@ -53,7 +54,7 @@ export default function PokeCard({ url }: PokeCardProps) {
         </Stack>
       </CardBody>
       <CardFooter>
-        <Button variant="outline">Click for more info</Button>
+        <Link href={'/pokemons/' + data.name}> <Button variant="outline" >Click for more info</Button></Link>
       </CardFooter>
     </Card>
   );
