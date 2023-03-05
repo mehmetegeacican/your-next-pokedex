@@ -8,10 +8,7 @@ import {
   Stack,
   Divider,
   Box,
-  Text,
   Button,
-  Tag,
-  WrapItem,
 } from "@chakra-ui/react";
 import axios from "axios";
 import Image from "next/image";
@@ -54,7 +51,10 @@ export default function PokeCard({ url }: PokeCardProps) {
         </Stack>
       </CardBody>
       <CardFooter>
-        <Link href={'/pokemons/' + data.name}> <Button variant="outline" >Click for more info</Button></Link>
+        <Link href={"/pokemons/" + data.name}>
+          {" "}
+          <Button variant="outline">Click for more info</Button>
+        </Link>
       </CardFooter>
     </Card>
   );
