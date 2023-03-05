@@ -18,7 +18,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const getStaticProps = async () => {
   const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon", {
-    params: { limit: 1249, offset: 0 },
+    params: { limit: 300, offset: 0 },
   });
   return {
     props: {

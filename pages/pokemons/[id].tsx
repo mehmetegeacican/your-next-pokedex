@@ -11,12 +11,13 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import TypeTag from "../../components/TypeTag";
+import Image from 'next/image'
 /**
  * Getting the Static Path
  */
 export const getStaticPaths = async () => {
   const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon", {
-    params: { limit: 1249, offset: 0 },
+    params: { limit: 300, offset: 0 },
   });
 
   const paths = data.results.map((poke: any) => {
@@ -70,16 +71,16 @@ export default function Pokemon({ pokemon }: any) {
           <CardBody>
             <Stack direction="row" spacing={2}>
               {pokemon.sprites && (
-                <img src={pokemon.sprites.front_default} alt="sprite" />
+                <Image loader={() => pokemon.sprites.front_default} src={pokemon.sprites.front_default} alt={"sprite"} width={90} height={30}/> 
               )}
               {pokemon.sprites && (
-                <img src={pokemon.sprites.back_default} alt="sprite" />
+                <Image loader={() => pokemon.sprites.back_default} src={pokemon.sprites.front_default} alt={"sprite"} width={90} height={30}/> 
               )}
               {pokemon.sprites && (
-                <img src={pokemon.sprites.front_shiny} alt="sprite" />
+                <Image loader={() => pokemon.sprites.front_shiny} src={pokemon.sprites.front_shiny} alt={"sprite"} width={90} height={30}/> 
               )}
               {pokemon.sprites && (
-                <img src={pokemon.sprites.back_shiny} alt="sprite" />
+                <Image loader={() => pokemon.sprites.back_shiny} src={pokemon.sprites.back_shiny} alt={"sprite"} width={90} height={30}/> 
               )}
             </Stack>
           </CardBody>

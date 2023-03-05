@@ -38,7 +38,7 @@ export default function PokeCard({ url }: PokeCardProps) {
         <Heading size="md">{data.name}</Heading>
       </CardHeader>
       <CardBody>
-        {data.sprites && <img src={data.sprites.front_default} alt="sprite" />}
+        {data.sprites && <Image loader={() => data.sprites.front_default} src={data.sprites.front_default} alt={"sprite"} width={90} height={30}/> }
       </CardBody>
       <CardBody>
         <Stack divider={<Divider />} spacing={3}>
