@@ -66,7 +66,14 @@ export default function Home({ pokemons }: any) {
     setTimeout(() => {
       setLoader(false);
     }, 1000);
-  }, [pokeList, query]);
+  }, [query]);
+
+  useEffect(() => {
+    setLoader(true);
+    setTimeout(() => {
+      setLoader(false);
+    }, 100);
+  }, [pokeList]);
 
   const handleOffset = () => {
     if (offset - limit <= 0) {
