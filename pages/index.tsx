@@ -10,6 +10,7 @@ import {
   InputGroup,
   Flex,
   IconButton,
+  Spinner,
 } from "@chakra-ui/react";
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import { useEffect, useMemo, useState } from "react";
@@ -32,6 +33,7 @@ export default function Home({ pokemons }: any) {
   const [limit, setLimit] = useState<number>(18);
   const [pokeList, setPokelist] = useState<any>([]);
   const [query, setQuery] = useState<string>("");
+  const [loader, setLoader] = useState<boolean>(false);
 
   //Pagination is being done on the Client side
 
@@ -59,6 +61,13 @@ export default function Home({ pokemons }: any) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query, pokeList]);
 
+  useEffect(() => {
+    setLoader(true);
+    setTimeout(() => {
+      setLoader(false);
+    }, 1000);
+  }, [pokeList, query]);
+
   const handleOffset = () => {
     if (offset - limit <= 0) {
       setOffset(0);
@@ -66,7 +75,6 @@ export default function Home({ pokemons }: any) {
       setOffset(offset - limit);
     }
   };
-
   return (
     <>
       <Head>
@@ -102,16 +110,20 @@ export default function Home({ pokemons }: any) {
           </Flex>
         </Container>
         <Container maxW="container.sm" centerContent sx={{ mt: 5 }}>
-          <SimpleGrid columns={3} spacing={1} width={800} sx={{ mt: 2 }}>
-            {pokeList &&
-              pokemonList.map((pokemon: any) => {
-                return (
-                  <Box key={pokemon.name}>
-                    <PokeCard url={pokemon.url} />
-                  </Box>
-                );
-              })}
-          </SimpleGrid>
+          {loader ? (
+            <Spinner color="red.500" />
+          ) : (
+            <SimpleGrid columns={3} spacing={1} width={800} sx={{ mt: 2 }}>
+              {pokeList &&
+                pokemonList.map((pokemon: any) => {
+                  return (
+                    <Box key={pokemon.name}>
+                      <PokeCard url={pokemon.url} />
+                    </Box>
+                  );
+                })}
+            </SimpleGrid>
+          )}
         </Container>
       </main>
     </>
