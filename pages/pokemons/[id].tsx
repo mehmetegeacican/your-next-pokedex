@@ -40,15 +40,23 @@ interface PokeInterface {
   stats: any;
 }
 
+
 export const getStaticProps = async (context: any) => {
   const name = context.params.id;
   const res = await axios.get(
     "https://pokeapi.co/api/v2/pokemon/" + context.params.id
   );
 
+  let sprite:any = {
+    front_default: res.data.sprites.front_default,
+    back_default: res.data.sprites.back_default,
+    front_shiny: res.data.sprites.front_shiny,
+    back_shiny: res.data.sprites.back_shiny
+  }
+
   let pokemonData: PokeInterface = {
     id: res.data.id,
-    sprites: res.data.sprites,
+    sprites: sprite,
     height: res.data.height,
     weight: res.data.weight,
     types: res.data.types,
