@@ -15,7 +15,8 @@ import Image from 'next/image'
 /**
  * Getting the Static Path
  */
-export const getStaticPaths = async () => {
+/*
+export const getServerSidePaths = async () => {
   const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon", {
     params: { limit: 300, offset: 0 },
   });
@@ -30,6 +31,7 @@ export const getStaticPaths = async () => {
     fallback: false,
   };
 };
+*/
 
 interface PokeInterface {
   id: number;
@@ -41,7 +43,7 @@ interface PokeInterface {
 }
 
 
-export const getStaticProps = async (context: any) => {
+export const getServerSideProps = async (context: any) => {
   const name = context.params.id;
   const res = await axios.get(
     "https://pokeapi.co/api/v2/pokemon/" + context.params.id
