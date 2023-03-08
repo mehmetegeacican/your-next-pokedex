@@ -65,7 +65,7 @@ export default function Home({ pokemons }: any) {
     setLoader(true);
     setTimeout(() => {
       setLoader(false);
-    }, 1000);
+    }, 400);
   }, [query]);
 
   useEffect(() => {
