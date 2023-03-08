@@ -1,4 +1,11 @@
+## Your-next-pokedex
+A simple pokedex application implemented with Next.js and Chakra UI. <br/>
+
+<img src="./public/screenshots/next_pokedex_1.PNG" alt="poke1" width = 48% height = 45%></img>
+<img src="./public/screenshots/next_pokedex_2.PNG" alt="poke2" width = 48% height = 45%></img>
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
 
 ## Getting Started
 
