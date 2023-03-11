@@ -16,7 +16,7 @@ import Image from 'next/image'
  * Getting the Static Path
  */
 /*
-export const getServerSidePaths = async () => {
+export const getStaticSitePaths = async () => {
   const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon", {
     params: { limit: 300, offset: 0 },
   });
@@ -81,10 +81,10 @@ export default function Pokemon({ pokemon }: any) {
           <CardBody>
             <Stack direction="row" spacing={2}>
               {pokemon.sprites && (
-                <Image loader={() => pokemon.sprites.front_default} src={pokemon.sprites.front_default} alt={"sprite"} width={90} height={30}/> 
+                <Image loader={() => pokemon.sprites.front_default}  src={pokemon.sprites.front_default} alt={"sprite"} width={90} height={30}/> 
               )}
               {pokemon.sprites && (
-                <Image loader={() => pokemon.sprites.back_default} src={pokemon.sprites.front_default} alt={"sprite"} width={90} height={30}/> 
+                <Image loader={() => pokemon.sprites.back_default}  src={pokemon.sprites.front_default} alt={"sprite"} width={90} height={30}/> 
               )}
               {pokemon.sprites && (
                 <Image loader={() => pokemon.sprites.front_shiny} src={pokemon.sprites.front_shiny} alt={"sprite"} width={90} height={30}/> 
